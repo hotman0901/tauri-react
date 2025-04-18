@@ -1,14 +1,22 @@
-/**
-This page invokes an async Tauri function, which returns a Promise.
-The goal is to demonstrate how to handle data promises, with loaders, Suspend, and Await
-*/
+import { Suspense } from "react";
+import { usePromise } from "@mittwald/react-use-promise";
+import { Link } from "react-router-dom";
+
 import wait from "waait";
 
-import { Suspense, lazy } from "react";
-import { useLoaderData, Await } from "react-router";
-const Albums = lazy(async () => {
-  return import("@/components/albums")
-});
+const fetchData = async (id) => {
+  await wait(3000);
+  return { name: "benny-"+id };
+};
+
+function Item({ id }) {
+  const news = usePromise(fetchData, [id], {
+    // ✨ Use the async loader 👆 function with its ID-parameter
+    tags: [`news/${id}`],
+    // Use tags 🏷️ with support for "tree structures" 🌳
+  });
+  return <p>Here is the message: {news?.name}</p>;
+}
 
 const Fallback = () => {
   return (
@@ -20,8 +28,17 @@ const Fallback = () => {
 
 export default function Promise() {
   return (
-    <Suspense fallback={<Fallback />}>
-      <Albums />
-    </Suspense>
+    <div>
+      <Link to="/">go Home</Link>
+      <Suspense fallback={<Fallback />}>
+        <Item id={1} />
+      </Suspense>
+      <Suspense fallback={<Fallback />}>
+        <Item id={2} />
+      </Suspense>
+      <Suspense fallback={<Fallback />}>
+        <Item id={new Date() / 1} />
+      </Suspense>
+    </div>
   );
 }

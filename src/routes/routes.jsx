@@ -10,7 +10,8 @@ const RootLayout = () => {
   const navigation = useNavigation();
   return (
     <div>
-      <Outlet />
+      {navigation.state === "loading" ? <h1>Loading..</h1> : <Outlet />}
+      {/* <Outlet /> */}
     </div>
   );
 };
@@ -33,19 +34,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-// function Test() {
-//   const { name } = useLoaderData();
-//   return (
-//     <Suspense fallback={<div>loading</div>}>
-//       <Await resolve={name} errorElement={<p>Error loading the data!</p>}>
-//         {(data) => {
-//           return data;
-//         }}
-//       </Await>
-//     </Suspense>
-//   );
-// }
 
 export default function Index() {
   return <RouterProvider router={router} />;
