@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const About = (props) => {
+const About = () => {
   return (
     <div>
       <h2>about</h2>
