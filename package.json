@@ -10,7 +10,10 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
     "@mittwald/react-use-promise": "^3.0.4",
+    "@mui/material": "latest",
     "@tauri-apps/api": "^2.5.0",
     "@tauri-apps/plugin-opener": "^2.2.6",
     "react": "^19.1.0",
