@@ -1,21 +1,23 @@
-/**
-This page invokes an async Tauri function, which returns a Promise.
-The goal is to demonstrate how to handle data promises, with loaders, Suspend, and Await
-*/
 import { Suspense } from "react";
-import { useLoaderData, Await } from "react-router-dom";
-import { invoke } from "@tauri-apps/api/core";
+import { usePromise } from "@mittwald/react-use-promise";
+import { Link } from "react-router-dom";
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
+import wait from "waait";
 
-
-/**
-Page data loader
-This function returns a Promise via DeferredData.  This enables the use of Suspend within the component
-*/
-export const promiseLoader = async () => {
-  // let dataPromise = invoke("promise");
-  // console.log("promiseLoader returned");
-  return 123123;
+const fetchData = async (id) => {
+  await wait(3000);
+  return { name: "benny-" + id };
 };
+
+function Item({ id }) {
+  const news = usePromise(fetchData, [id], {
+    // ✨ Use the async loader 👆 function with its ID-parameter
+    tags: [`news/${id}`],
+    // Use tags 🏷️ with support for "tree structures" 🌳
+  });
+  return <p>Here is the message: {news?.name}</p>;
+}
 
 const Fallback = () => {
   return (
@@ -25,25 +27,35 @@ const Fallback = () => {
   );
 };
 
-const Resolved = ({ data }) => {
+export default function Promise() {
   return (
     <div>
-      <div>{data}</div>
-    </div>
-  );
-};
-
-export default function Promise() {
-  const dataPromise = useLoaderData(); // DeferredData returns an object with Promises
-  console.log("🚀 ~ Promise ~ dataPromise:", dataPromise)
-  console.log("Made it to Promise");
-
-  // Demonstrate a typical pattern with a "fallback" and "resolved" path
-  return (
-      <Suspense fallback={<Fallback />}>
-        <Await resolve={dataPromise.data} errorElement={<p>Error loading the data!</p>}>
-          {(data) => <Resolved data={data} />}
-        </Await>
+      <Link to="/">go Home</Link>
+      <Suspense
+        fallback={
+          <Stack spacing={1}>
+            <Skeleton variant="circular" width={40} height={40} />
+          </Stack>
+        }
+      >
+        <Item id={1} />
       </Suspense>
+      <Suspense fallback={<Fallback />}>
+        <Item id={2} />
+      </Suspense>
+      <Suspense
+        fallback={
+          <Stack spacing={1}>
+            <Skeleton
+              animation="wave"
+              variant="text"
+              sx={{ fontSize: "1rem", bgcolor: "grey.500" }}
+            />
+          </Stack>
+        }
+      >
+        <Item id={new Date() / 1} />
+      </Suspense>
+    </div>
   );
 }
