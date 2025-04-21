@@ -1,10 +1,11 @@
+import { ThemeProvider } from "@mui/material/styles";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
+
+import About from "@/pages/about";
 // import CssBaseline from '@mui/material/CssBaseline';
 import Home from "@/pages/home";
-import About from "@/pages/about";
 import Promise from "@/pages/promise";
-import { Outlet, useNavigation } from "react-router-dom";
-import { ThemeProvider } from '@mui/material/styles';
 import theme from "@/theme"
 
 const RootLayout = () => {

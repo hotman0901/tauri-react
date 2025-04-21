@@ -1,10 +1,10 @@
-import { Suspense } from "react";
 import { usePromise } from "@mittwald/react-use-promise";
-import { Link } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
+import PropTypes from "prop-types";
+import { Suspense } from "react";
+import { Link } from "react-router-dom";
 import wait from "waait";
-import PropTypes from 'prop-types';
 
 const fetchData = async (id) => {
   await wait(3000);
