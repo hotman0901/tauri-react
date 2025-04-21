@@ -4,10 +4,15 @@ import { Link } from "react-router-dom";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import wait from "waait";
+import PropTypes from 'prop-types';
 
 const fetchData = async (id) => {
   await wait(3000);
   return { name: "benny-" + id };
+};
+
+Item.propTypes = {
+  id: PropTypes.number.isRequired,
 };
 
 function Item({ id }) {
