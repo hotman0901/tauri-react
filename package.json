@@ -8,8 +8,13 @@
     "build": "vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "precommit": "echo 'pre-commit checks...' && exit 0"
   },
+  "pre-commit": [
+    "precommit",
+    "lint"
+  ],
   "dependencies": {
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
@@ -41,6 +46,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^16.0.0",
+    "pre-commit": "^1.2.2",
     "prettier": "^3.5.3",
     "prop-types": "^15.8.1",
     "vite": "^6.3.2"
