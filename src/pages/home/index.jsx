@@ -12,10 +12,16 @@ function Index() {
     <>
       <h1>{t("Welcome")} Tauri + React</h1>
       <Stack spacing={2} direction="row">
-        <Button variant={lng === "en" ? "contained" : "outlined"} onClick={() => i18n.changeLanguage("en")}>
+        <Button
+          variant={lng === "en" ? "contained" : "outlined"}
+          onClick={() => i18n.changeLanguage("en")}
+        >
           EN
         </Button>
-        <Button variant={lng === "zh" ? "contained" : "outlined"} onClick={() => i18n.changeLanguage("zh")}>
+        <Button
+          variant={lng === "zh" ? "contained" : "outlined"}
+          onClick={() => i18n.changeLanguage("zh")}
+        >
           ZH
         </Button>
       </Stack>

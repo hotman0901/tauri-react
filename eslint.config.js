@@ -12,6 +12,7 @@ export default defineConfig([
   pluginReact.configs.flat.recommended,
   {
     rules: {
+      "semi": [2, "always"],
       "react/react-in-jsx-scope": "off",
       "react/jsx-uses-react": "off",
       "react-hooks/rules-of-hooks": 0,

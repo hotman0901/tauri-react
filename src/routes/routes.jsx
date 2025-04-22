@@ -6,7 +6,7 @@ import About from "@/pages/about";
 // import CssBaseline from '@mui/material/CssBaseline';
 import Home from "@/pages/home";
 import Promise from "@/pages/promise";
-import theme from "@/theme"
+import theme from "@/theme";
 
 const RootLayout = () => {
   const navigation = useNavigation();
